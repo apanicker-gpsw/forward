@@ -42,6 +42,7 @@ OPTIONS:
    --hostname, -n "MBP.local"    # Uses local hostname by default
    --app, -a "logger"           
    --priority, -p "22"
+   --att, -x      # Attach syslog header to message
 ```
 
 ### Example
@@ -53,15 +54,23 @@ OPTIONS:
 ❯❯❯ ./std_generator 2>&1| forward logs3.papertrailapp.com:XXXXX
 ```
 
-##### Syslog example
+##### Syslog example to papertrail (attach headers for papertrail)
 ```shell
-❯❯❯ echo "Test Log Message" | forward log -n some.host.name -a worker -p 15 logs3.papertrailapp.com:XXXXX
+❯❯❯ echo "Test Log Message" | forward log -x -n some.host.name -a worker -p 15 logs3.papertrailapp.com:XXXXX
 ```
 yields
 ```syslog
 <15>1 2016-02-29T09:22:48Z some.host.name worker - - - Test Log Message
 ```
 
+##### Syslog example to ELK (not attaching headers for ELK)
+```shell
+❯❯❯ echo "Test Log Message" | forward log -n some.host.name -a worker -p 15 elk-syslog.gopro-platform.com:XXXXX
+```
+yields
+```syslog
+Test Log Message
+```
 
 ### Recommended Settings
 ```shell
@@ -70,7 +79,7 @@ yields
 
 ### Build
 ```shell
-❯❯❯ go get github.com/NickSardo/forward
+❯❯❯ go get github.com/apanicker-gpsw/forward
 ```
 
 ### Why?
