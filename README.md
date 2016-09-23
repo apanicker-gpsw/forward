@@ -42,7 +42,7 @@ OPTIONS:
    --hostname, -n "MBP.local"    # Uses local hostname by default
    --app, -a "logger"           
    --priority, -p "22"
-   --att, -x      # Attach syslog header to message
+   --att, -x                     # Attach syslog header to message
 ```
 
 ### Example
